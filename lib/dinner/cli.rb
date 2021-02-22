@@ -18,9 +18,9 @@ class Dinner::CLI
         user_protein_selection = gets.chomp
         line_break
 
-        # Displays a List of Meals based on the protein chosen
+        # Prints a List of Meals based on the protein chosen
         puts ""
-        meal_options = Dinner::API.get_recipe_list(user_protein_selection)
+        meal_options = Dinner::API.get_meal_list(user_protein_selection)
         i = 1
         meal_options.each do |meal|
             puts "     #{i}.  #{meal['strMeal']}"
@@ -28,13 +28,21 @@ class Dinner::CLI
         end
         line_break
 
-        #Asks user for a meal selection
+        # Asks user for a meal selection
         puts "Please enter a number (1 - 15)."
+        user_meal_selection = gets.chomp
+
+        # Prints the details for the meal selected
+        Dinner::API.get_meal_detail(user_meal_selection)
 
     end
     
     def line_break
         puts "\n ------------------------------------------\n "
+    end
+
+    def error_message
+        puts "Incorrect input, please try again.\n "
     end
 
 end

@@ -6,16 +6,15 @@ class Dinner::API
 
 
     # Gets an array of 15 Recipe objects from the API based on user_protein_selection
-    def self.get_recipe_list(user_protein_selection)
+    def self.get_meal_list(user_protein_selection)
         protein_choice = @protein_options[user_protein_selection.to_i - 1]
-        meals_by_protein = []
-        recipes_by_protein = HTTParty.get("https://www.themealdb.com/api/json/v1/1/filter.php?c=#{protein_choice}").values[0].take(15)
+        @meals_by_protein = HTTParty.get("https://www.themealdb.com/api/json/v1/1/filter.php?c=#{protein_choice}").values[0].take(15)
     end
     
-    #Gets the recipe details from the API based on user_meal_selection
-    def self.get_recipe_detail
-
-
-
+    # Gets the recipe details from the API based on user_meal_selection
+    def self.get_meal_detail(user_meal_selection)
+        meal_index = user_meal_selection.to_i - 1
+        meal_detail = @meals_by_protein[meal_index]
+        meal = Dinner::Meal.new(meal_detail["idMeal"].to_i, meal_detail["strMeal"])
     end
 end
