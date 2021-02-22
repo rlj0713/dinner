@@ -45,8 +45,9 @@ class Dinner::CLI
             puts "     \u2022  #{item}"
         end
 
-        puts " \nProcedure:"
+        puts " \n -- Procedure -- "
         puts meal.procedure
+        line_break
     end
     
     def line_break

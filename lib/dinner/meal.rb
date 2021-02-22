@@ -53,9 +53,4 @@ class Dinner::Meal
     def video
         @video = @summary["strYoutube"]
     end
-
-    # Gets all meal details based on selection
-    # def self.summary
-    #     @summary = HTTParty.get("https://www.themealdb.com/api/json/v1/1/lookup.php?i=#{@meal_id}").values[0][0]
-    # end
 end

@@ -1,7 +1,15 @@
 #!/usr/bin/env ruby
 
-puts "hello"
-
 require_relative '../config/environment'
 
-cli = Dinner::CLI.new.call
+cli = Dinner::CLI.new
+
+while true
+    cli.call
+    puts "Would you like to view another recipe? (yes / no)"
+    yes_options = ["yes", "Yes", "Si", "si", "y", "Y"]
+    if yes_options.include?(gets.chomp) == false
+        puts " \nEnjoy your meal!\n "
+        break
+    end
+end
