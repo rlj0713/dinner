@@ -33,8 +33,20 @@ class Dinner::CLI
         user_meal_selection = gets.chomp
 
         # Prints the details for the meal selected
-        Dinner::API.get_meal_detail(user_meal_selection)
+        meal = Dinner::API.create_meal(user_meal_selection)
+        line_break
 
+        puts "Your have chosen #{meal.meal_name}, excellent choice.\n "
+        puts "Recipe Nationality: #{meal.nationality}"
+        puts "Video Instructions: #{meal.video}"
+
+        puts " \nShopping List:"
+        meal.shopping_list.each do |item|
+            puts "     \u2022  #{item}"
+        end
+
+        puts " \nProcedure:"
+        puts meal.procedure
     end
     
     def line_break

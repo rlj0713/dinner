@@ -11,10 +11,13 @@ class Dinner::API
         @meals_by_protein = HTTParty.get("https://www.themealdb.com/api/json/v1/1/filter.php?c=#{protein_choice}").values[0].take(15)
     end
     
-    # Gets the recipe details from the API based on user_meal_selection
-    def self.get_meal_detail(user_meal_selection)
+    # Instantiates a new recipe object with a name & id
+    def self.create_meal(user_meal_selection)
         meal_index = user_meal_selection.to_i - 1
-        meal_detail = @meals_by_protein[meal_index]
-        meal = Dinner::Meal.new(meal_detail["idMeal"].to_i, meal_detail["strMeal"])
+        @meal_detail = @meals_by_protein[meal_index]
+        @meal = Dinner::Meal.new(@meal_detail["idMeal"], @meal_detail["strMeal"])
+        @meal.summary = HTTParty.get("https://www.themealdb.com/api/json/v1/1/lookup.php?i=#{@meal_detail["idMeal"]}").values[0][0]
+        @meal
     end
+        
 end

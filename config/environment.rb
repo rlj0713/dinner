@@ -7,7 +7,3 @@ require_relative "../lib/dinner/meal"
 require "pry"
 require "httparty"
 
-module Dinner
-  class Error < StandardError; end
-  # Your code goes here...
-end
